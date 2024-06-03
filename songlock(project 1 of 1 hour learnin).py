@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 import base64
 from requests import post, get
 import json
@@ -7,10 +8,12 @@ from random import shuffle
 #ask if you want to run code 1 or code 2
 done = 0
 
+load_dotenv("d:\solocoding\python studi\songlocked\.env")
+
 #find connect to spotify
 def get_token():
-   clientid = "e6a25b6d0d164a1dbd3095a6d6603c46"
-   clientsecret = "7396ac72a5be4183a4bebb731094a923"
+   clientid = os.getenv("clientid")
+   clientsecret = os.getenv("clientsecret")
    
    auth_str = clientid + ":" + clientsecret
    auth_UTF = auth_str.encode("utf-8")
