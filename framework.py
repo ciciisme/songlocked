@@ -35,7 +35,6 @@ def questions(mode):
     favsong = str(search_song_items(favtemp)[int(favartist)]["name"])
     favsongid = str(search_song_items(favtemp)[int(favartist)]["id"])
     
-    return favartist, favtemp, favitems, favsong, favsongid
+    return favsong, favsongid
 
 
-      
