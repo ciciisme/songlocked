@@ -37,13 +37,13 @@ def get_token():
    json_auth = json.loads(result.content)
    
    return json_auth["access_token"]
-
-def auth_head(token):
+token = get_token()
+def auth_head():
    return {"Authorization": "Bearer " + token}
 
-def search_song_items(tok, song):
+def search_song_items(song):
    url = "https://api.spotify.com/v1/search"
-   head = auth_head(tok)
+   head = auth_head(token)
    query = f"?q={song}&type=track&limit=5"
    queryurl = url + query
     
@@ -73,6 +73,14 @@ while done == 0:
    #find start-trans
    print("what is your favorite song")
    favtemp = str(input())
+   favitems = str(search_song_items(token, favtemp))
+   
+   while len(favitems) == 0:
+      print("The system cannot find your song")
+      favtemp = input("Please try again: ")
+      favitems = str(search_song_items(token, favtemp))
+
+
    print(f"which of these artists made your favorite song \n {artist_list(favtemp)} \n (if there is a duplicate, choose the lowest number)")
    favartist = input("Place artist number: ")
    print("If there was a typo in the title of the song, the encryption will be wrong \
@@ -86,7 +94,7 @@ while done == 0:
          continue
     except:
       input("Place artist number under 5: ")
-   
+
    favsong = str(search_song_items(token, favtemp)[int(favartist)]["name"])
    favsongid = str(search_song_items(token,favtemp)[int(favartist)]["id"])
    password = input("Place the password you want to encrypt: ")
@@ -153,15 +161,15 @@ while done == 0:
         fun = cipher_list[fun]
         enc_trans[eminem] = str(fun)
 
-   print(enc_trans)
-
- elif choice.upper() == str("DECRYPT"):
-    print("place the encrypted password: ")
-    done = 1
- else:
-     print('please type Encrypt or Decrypt ')
-print("done :)")
-    
+   print(f"encrypted cipher {enc_trans}")
+   final:tuple = ""
+   for chr in range(len(enc_trans)):
+    final = final + str(enc_trans[chr])
+   print(f"Your encrypted password is:  {final}\
+         \n Remember to save it somewhere to keep it safe")
+   done = 1
+   break
+ 
    #step 1 of c1: we need to encrypt the password based on the favorite song of the user
        
         #step 2 of c1: The cipher should come from the song, lets use the spotify api to get the song info
