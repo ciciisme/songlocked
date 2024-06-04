@@ -1,7 +1,8 @@
+
 from dotenv import load_dotenv
 import json
 from random import shuffle
-import framework
+from framework import questions
 # finables, ( end-trans, start-trans)
 #ask if you want to run code 1 or code 2
 done = 0
@@ -12,12 +13,14 @@ with open("D:\solocoding\python studi\songlocked\cipher.json") as file:
 load_dotenv("D:\solocoding\python studi\songlocked\.env")
 
 
-questions = framework.questions("ENCRYPT")
 
-framework.questions("ENCRYPT")
+question = questions("ENCRYPT")
 
-favsong = questions[0]
-favsongid = questions[1]
+favartist = question[0]
+favtemp = question[1]
+favitems = question[2]
+favsong = question[3]
+favsongid = question[4]
 password = input("Place the password you want to encrypt: ")
 password = str(password)
 
