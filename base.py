@@ -17,10 +17,11 @@ def questions(mode):
         break
 
 
-    while len(favitems) == 0:
-        print("The system cannot find your song")
-    favtemp = input("Please try again: ")
-    favitems = str(search_song_items(favtemp))
+    if len(favitems) == 0:
+       while len(favitems) == 0:
+           print("The system cannot find your song")
+       favtemp = input("Please try again: ")
+       favitems = str(search_song_items(favtemp))
     
 
     print(f"which of these artists made your favorite song \n {artist_list(favtemp)} \n (if there is a duplicate, choose the lowest number)")

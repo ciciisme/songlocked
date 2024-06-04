@@ -2,7 +2,7 @@
 from dotenv import load_dotenv
 import json
 from random import shuffle
-from framework import questions
+from base import questions
 # finables, ( end-trans, start-trans)
 #ask if you want to run code 1 or code 2
 done = 0
