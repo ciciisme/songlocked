@@ -12,7 +12,8 @@ with open("D:\solocoding\python studi\songlocked\cipher.json") as file:
 
 load_dotenv("D:\solocoding\python studi\songlocked\.env")
 
-
+q1 = "Hello I am the song encryptor \n I will encrypt your password based on your favorite song \n Encrypt or Decrypt password?"
+print(q1)
 
 question = questions("ENCRYPT")
 
