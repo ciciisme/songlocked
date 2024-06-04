@@ -1,7 +1,12 @@
 from spotipy import search_song_items, artist_list
 
 
+
 def questions(mode):
+
+    q1 = "Hello I am the song encryptor \n I will encrypt your password based on your favorite song \n Encrypt or Decrypt password?"
+    print(q1)
+   
     while True:
         choice = input()
         if choice.upper() == str(mode):
@@ -36,5 +41,4 @@ def questions(mode):
     favsongid = str(search_song_items(favtemp)[int(favartist)]["id"])
     
     return favsong, favsongid
-
 
