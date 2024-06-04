@@ -8,12 +8,16 @@ from random import shuffle
 #ask if you want to run code 1 or code 2
 done = 0
 
-load_dotenv("d:\solocoding\python studi\songlocked\.env")
+with open("D:\solocoding\python studi\songlocked\cipher.json") as file:
+   cipher_list = json.load(file)["list"]
+
+load_dotenv("D:\solocoding\python studi\songlocked\.env")
+
+clientid = os.environ.get("clientid")
+clientsecret = os.environ.get("clientsecret")
 
 #find connect to spotify
 def get_token():
-   clientid = os.getenv("clientid")
-   clientsecret = os.getenv("clientsecret")
    
    auth_str = clientid + ":" + clientsecret
    auth_UTF = auth_str.encode("utf-8")
@@ -118,10 +122,38 @@ while done == 0:
    for i in range(0,6):
       for l in range(0,2):
          enc_trans += trans[(str(favcipher[i]), l + 1)]
-   enc_trans = tuple(enc_trans)
+   enc_trans = list(enc_trans)
 
    print(enc_trans)
    #find end-trans
+
+   num:int = len(favsong)
+
+   if (num % 2) == 0:
+      odd:bool = True
+   else:
+      odd:bool = False
+   
+   if odd == True:
+      for eminem in range(0, int(len(enc_trans))):
+        fun = enc_trans[eminem]
+        fun = cipher_list.index(fun)
+        fun = fun + num
+        if fun > 93:
+            fun = fun - 94
+        fun = cipher_list[fun]
+        enc_trans[eminem] = str(fun)
+   else:
+      for eminem in range(0, int(len(enc_trans))):
+        fun = enc_trans[eminem]
+        fun = cipher_list.index(fun)
+        fun = fun - num
+        if fun < 0:
+            fun = fun +94
+        fun = cipher_list[fun]
+        enc_trans[eminem] = str(fun)
+
+   print(enc_trans)
 
  elif choice.upper() == str("DECRYPT"):
     print("place the encrypted password: ")
