@@ -48,6 +48,7 @@ def search_song_items(song):
    return  json_result
 
 def artist_list(song):
+
    artists= {}
    for x in range(0,5):
       artists[int(x) + 1] = str(search_song_items(song)[x]["artists"][0]["name"])

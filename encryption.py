@@ -1,7 +1,7 @@
 
 from dotenv import load_dotenv
 import json
-from random import shuffle
+from random import shuffle,randrange
 from base import questions
 # finables, ( end-trans, start-trans)
 #ask if you want to run code 1 or code 2
@@ -17,12 +17,20 @@ question = questions("ENCRYPT")
 
 favsong = question[0]
 favsongid = question[1]
+
 password = input("Place the password you want to encrypt: ")
 password = str(password)
+while True:
+   if (" " in password) or ("-" in password):
+    password = input("No - or spaces: ")
+   else:
+      break
 
 
 favcipher = [*(str(favsongid[0:6]))]
 shuffle(favcipher)  
+
+
 
 trans:dict = {}
 
@@ -43,8 +51,9 @@ for y in range(0, valo):
 
       except:
          nxt_key = int((6 - (tru_valo  - int(len(trans)))) + 1)
-         trans.update({(favsongid[x-1], y+1): " "})
+         trans.update({(favsongid[x-1], y+1): "-"})
 
+print(trans)
 enc_trans = []
 
 for i in range(0,6):
@@ -67,8 +76,8 @@ if odd == True:
       fun = enc_trans[eminem]
       fun = cipher_list.index(fun)
       fun = fun + num
-      if fun > 93:
-         fun = fun - 94
+      if fun > 92:
+         fun = fun - 93
       fun = cipher_list[fun]
       enc_trans[eminem] = str(fun)
 else:
@@ -77,7 +86,7 @@ else:
       fun = cipher_list.index(fun)
       fun = fun - num
       if fun < 0:
-         fun = fun +94
+         fun = fun +92
       fun = cipher_list[fun]
       enc_trans[eminem] = str(fun)
 
@@ -85,6 +94,18 @@ print(f"encrypted cipher {enc_trans}")
 final:tuple = ""
 for chr in range(len(enc_trans)):
    final = final + str(enc_trans[chr])
+
+
+splitter = str(cipher_list[randrange(0,93)])
+
+if (splitter in final) or (splitter in favcipher):
+   while (splitter in final) or (splitter in favcipher):
+      splitter = str(cipher_list[randrange(0,93)])
+
+final = final + splitter
+
+for chr in range(0,6):
+   final = final + str(favcipher[chr])
 print(f"Your encrypted password is:  {final}\
       \n ------------------------------------- \
       \n Remember to save it somewhere to keep it safe")
