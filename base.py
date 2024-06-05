@@ -4,17 +4,12 @@ from spotipy import search_song_items, artist_list
 
 def questions(mode):
 
-    q1 = "Hello I am the song encryptor \n I will encrypt your password based on your favorite song \n Encrypt or Decrypt password?"
-    print(q1)
-   
-    while True:
-        choice = input()
-        if choice.upper() == str(mode):
+    
         #find start-trans
-            print("what is your favorite song")
-        favtemp = str(input())
-        favitems = str(search_song_items(favtemp))
-        break
+    print("what is your favorite song")
+    favtemp = str(input())
+    favitems = str(search_song_items(favtemp))
+    
 
 
     if len(favitems) == 0:
